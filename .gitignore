@@ -1,0 +1,12 @@
+secret.json
+
+.gradle
+build
+
+out
+*.ipr
+*.iws
+*.iml
+.idea/
+
+*.class
