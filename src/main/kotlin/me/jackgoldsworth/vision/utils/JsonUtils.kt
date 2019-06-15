@@ -4,10 +4,10 @@ import com.google.gson.JsonParser
 
 object JsonUtils {
 
-    fun loadCredentials(fileName: String): Map<String, String>
-    {
-        val map: MutableMap<String, String> = mutableMapOf()
-        val content = JsonUtils::class.java.getResource(fileName)
+    @JvmStatic
+    fun loadCredentials(fileName: String): Map<String, String> {
+        val map = mutableMapOf<String, String>()
+        val content = JsonUtils::class.java.classLoader.getResource(fileName)
         val json = JsonParser().parse(content.readText())
         map["client"] = json.asJsonObject["client"].asString
         map["secret"] = json.asJsonObject["secret"].asString
