@@ -9,7 +9,7 @@ class SpotifyHandler {
     private lateinit var spotifyApi: SpotifyApi
 
     fun connect() {
-        val credMap = JsonUtils.loadCredentials("")
+        val credMap = JsonUtils.loadCredentials("secret.json")
         spotifyApi = SpotifyApi.builder()
             .setClientId(credMap["client"])
             .setClientSecret(credMap["secret"])
