@@ -12,5 +12,6 @@ object Vision {
     fun main(args: Array<String>)
     {
         commandHandler.registerCommands()
+        spotify.connect()
     }
 }
