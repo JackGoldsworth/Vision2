@@ -6,7 +6,7 @@ class TestJsonUtils extends Specification {
 
     def "testLoadCredentials"() {
         setup:
-        String fileName = "credentials.json"
+        String fileName = "test.json"
 
         when:
         Map<String, String> map = JsonUtils.loadCredentials(fileName)
