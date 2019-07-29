@@ -1,5 +1,3 @@
-secret.json
-
 .gradle
 build
 
@@ -10,3 +8,5 @@ out
 .idea/
 
 *.class
+
+credentials.json
