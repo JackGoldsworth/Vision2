@@ -15,7 +15,7 @@ class SpotifyHandler {
             .setClientSecret(credMap["secret"])
             .setRedirectUri(URI(credMap["redirect"] ?: error("There was an issue with the redirect link")))
             .build()
-        spotifyApi.accessToken = ""
+        val request = spotifyApi.authorizationCodeUri().build()
         playTrack("Ballin")
     }
 

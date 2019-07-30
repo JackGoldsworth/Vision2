@@ -9,8 +9,7 @@ object Vision {
     private val commandHandler = CommandHandler()
 
     @JvmStatic
-    fun main(args: Array<String>)
-    {
+    fun main(args: Array<String>) {
         commandHandler.registerCommands()
         spotify.connect()
     }

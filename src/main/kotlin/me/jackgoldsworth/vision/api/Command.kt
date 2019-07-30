@@ -1,8 +1,9 @@
 package me.jackgoldsworth.vision.api
 
-interface Command {
+abstract class Command {
 
-    val name: String
-    val description: String?
-    val run: Runnable?
+    lateinit var name: String
+    lateinit var description: String
+
+    abstract fun execute()
 }
