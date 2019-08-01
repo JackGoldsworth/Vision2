@@ -12,6 +12,6 @@ class CommandHandler {
     fun registerCommands() {
         val list = ListCommand()
         commands[list.name] = list
-        list.execute()
+        list.execute(arrayOf())
     }
 }

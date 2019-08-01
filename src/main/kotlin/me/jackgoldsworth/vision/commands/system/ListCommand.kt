@@ -8,13 +8,14 @@ class ListCommand : Command() {
     init {
         this.name = "List"
         this.description = "List all of the commands"
+        this.usage = "list"
     }
 
-    override fun execute() {
+    override fun execute(args: Array<String>) {
         CommandHandler.commands.forEach {
             val value = it.value
-            println(value.name)
-            println("${value.description}\n")
+            print(value.name + ": ")
+            println(value.description)
         }
     }
 }
