@@ -5,11 +5,7 @@ class CommandExecutor {
     var commandType = CommandType.CONSOLE
 
     fun listen() {
-        if (commandType === CommandType.CONSOLE) {
-
-        } else {
-
-        }
+        //TODO: Console vs Voice commands.
     }
 
     enum class CommandType {
