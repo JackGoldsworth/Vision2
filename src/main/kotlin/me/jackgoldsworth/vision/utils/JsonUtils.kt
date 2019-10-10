@@ -1,7 +1,10 @@
 package me.jackgoldsworth.vision.utils
 
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import java.io.File
+import java.io.FileWriter
 import java.net.URL
 
 object JsonUtils {
@@ -17,6 +20,9 @@ object JsonUtils {
     @JvmStatic
     fun loadCredentials(): Map<String, String> {
         val content: URL? = JsonUtils::class.java.classLoader.getResource(fileName)
+        if (content == null) {
+            createCredentialsFile()
+        }
         val json = JsonParser().parse(content?.readText())
         credentials["client"] = json.asJsonObject["client"].asString
         credentials["secret"] = json.asJsonObject["secret"].asString
@@ -42,5 +48,29 @@ object JsonUtils {
         println(json.toString())
         File(content?.toURI()!!).writeText(json.toString())
         credentials["refresh"] = token
+    }
+
+    /**
+     * Creates a credentials file with the required fields.
+     * @return if the file was created successfully or not.
+     */
+    private fun createCredentialsFile(): Boolean {
+        val file = File(System.getProperty("user.dir") + "\\src\\main\\resources\\" + fileName)
+        val created = file.createNewFile()
+        val emptyObject = JsonObject()
+        emptyObject.addProperty("client", "")
+        emptyObject.addProperty("secret", "")
+        emptyObject.addProperty("redirect", "")
+        emptyObject.addProperty("refresh", "")
+        // TODO: Write isn't working.
+        Gson().toJson(emptyObject, FileWriter(file))
+        println(
+            if (created) {
+                "The credentials file was created"
+            } else {
+                "The credentials file was not created"
+            }
+        )
+        return created
     }
 }

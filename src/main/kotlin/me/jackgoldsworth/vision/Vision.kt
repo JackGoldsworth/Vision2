@@ -10,6 +10,7 @@ object Vision {
 
     @JvmStatic
     fun main(args: Array<String>) {
+        println(System.getProperty("user.dir"))
         commandHandler.registerCommands()
         spotify.connect()
     }

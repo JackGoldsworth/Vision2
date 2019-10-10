@@ -9,9 +9,9 @@ class CommandHandler {
         val commands = mutableMapOf<String, Command>()
     }
 
+    private val list = ListCommand()
+
     fun registerCommands() {
-        val list = ListCommand()
         commands[list.name] = list
-        list.execute(arrayOf())
     }
 }
