@@ -1,8 +1,9 @@
 package me.jackgoldsworth.vision.commands.spotify
 
+import com.wrapper.spotify.SpotifyApi
 import me.jackgoldsworth.vision.api.Command
 
-class TrackCommand : Command() {
+class TrackCommand(api: SpotifyApi) : Command() {
 
     init {
         this.name = "Track"

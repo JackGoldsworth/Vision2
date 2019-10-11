@@ -6,7 +6,7 @@ import java.net.URI
 
 class SpotifyHandler {
 
-    private lateinit var spotifyApi: SpotifyApi
+    lateinit var spotifyApi: SpotifyApi
 
     /**
      * Connects to Spotify with the credentials provided.
