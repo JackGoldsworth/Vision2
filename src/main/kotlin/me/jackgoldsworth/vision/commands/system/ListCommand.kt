@@ -9,6 +9,7 @@ class ListCommand : Command() {
         this.name = "List"
         this.description = "List all of the commands"
         this.usage = "list"
+        this.prefix = "List"
     }
 
     override fun execute(args: Array<String>) {
