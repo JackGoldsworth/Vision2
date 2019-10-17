@@ -1,13 +1,30 @@
 package me.jackgoldsworth.vision.commands
 
-class CommandExecutor {
+/**
+ * This class is responsible for executing commands.
+ * @param commandHandler command handler to start commands.
+ */
+class CommandExecutor(private val commandHandler: CommandHandler) {
 
-    var commandType = CommandType.CONSOLE
+    private var commandType = CommandType.CONSOLE
 
+    /**
+     * Enters a permanent loop that listens for text via
+     * Voice and console input.
+     */
     fun listen() {
-        //TODO: Console vs Voice commands.
+        while(true) {
+            // TODO: Voice
+            if(commandType == CommandType.CONSOLE) {
+                println("Listening...")
+                commandHandler.startCommand(readLine())
+            }
+        }
     }
 
+    /**
+     * The listening types.
+     */
     enum class CommandType {
         CONSOLE, VOICE
     }
