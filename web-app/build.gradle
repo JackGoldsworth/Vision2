@@ -1,0 +1,29 @@
+import org.jetbrains.gradle.ext.*
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+group 'me.jackgoldsworth.vision'
+version '0.1'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile "io.ktor:ktor-server-netty:1.3.0"
+}
+
+idea {
+    project {
+        settings {
+            runConfigurations {
+                "Run Web-App"(Application) {
+                    mainClass = "me.jackgoldsworth.webapp.MainKt"
+                    moduleName = "Vision.web-app.main"
+                }
+            }
+        }
+    }
+}
