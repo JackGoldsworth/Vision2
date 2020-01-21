@@ -19,7 +19,7 @@ fun Application.mainModule() {
     install(DefaultHeaders)
     install(Authentication)
     routing {
-        static {
+        static("/") {
             defaultResource("index.html", "web")
         }
         enterCredentials()
