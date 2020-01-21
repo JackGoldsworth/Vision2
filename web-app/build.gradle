@@ -6,13 +6,16 @@ plugins {
 
 group 'me.jackgoldsworth.vision'
 version '0.1'
+ext.ktorversion = "1.3.0"
 
 repositories {
     jcenter()
 }
 
 dependencies {
-    compile "io.ktor:ktor-server-netty:1.3.0"
+    compile "io.ktor:ktor-server-netty:${ktorversion}"
+    compile "io.ktor:ktor-locations:${ktorversion}"
+    compile "io.ktor:ktor-auth:${ktorversion}"
 }
 
 idea {
