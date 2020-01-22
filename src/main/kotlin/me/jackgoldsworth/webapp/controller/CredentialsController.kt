@@ -14,22 +14,7 @@ import org.apache.http.impl.client.HttpClients
 import org.apache.http.util.EntityUtils
 
 fun Route.enterCredentials() {
-    static("credentials") {
-        defaultResource("credentials.html", "web")
-    }
-    get("credentials/settings") {
+    get("credentials") {
         call.respondText(javaClass.classLoader.getResource("settings.json")!!.readText())
-    }
-    post("credentials") {
-        // TODO: Eventually switch this to ktor http calls.
-        val uri = call.receiveText()
-        val auth = uri.substring(uri.indexOf("access_token=") + 13, uri.indexOf("&token_type"))
-        val client = HttpClients.createDefault()
-        val request = RequestBuilder.get()
-            .setUri("https://api.spotify.com/v1/me/player/devices")
-            .setHeader(HttpHeaders.AUTHORIZATION, "Bearer $auth")
-            .build()
-        val response = client.execute(request)
-        val responseString = EntityUtils.toString(response.entity)
     }
 }

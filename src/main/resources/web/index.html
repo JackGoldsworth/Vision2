@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300&display=swap" rel="stylesheet">
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 </head>
-<body style="font-family: 'Montserrat', sans-serif; font-weight: 300;">
+<body style="font-family: 'Montserrat', sans-serif; font-weight: 300;" onload="onLoad()">
 <!-- Navbar -->
 <nav class="navbar " role="navigation" aria-label="main navigation">
     <div id="visionNavbar" class="navbar-menu">
@@ -44,7 +44,7 @@
 <script>
     function clickLogin() {
         let scopes = 'user-read-private user-read-email';
-        fetch('credentials/settings').then(function (response) {
+        fetch('credentials').then(function (response) {
             return response.json();
         }).then(function (myJson) {
             let json = JSON.stringify(myJson);
@@ -59,7 +59,7 @@
 
     function onLoad() {
         if(window.location.hash) {
-            fetch("credentials", {
+            fetch("http://localhost:8080", {
                 method: "POST",
                 body: window.location.hash.toString()
             });
