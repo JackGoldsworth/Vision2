@@ -5,22 +5,25 @@ plugins {
     id "org.sonarqube" version "2.7"
     id 'groovy'
     id "org.jetbrains.gradle.plugin.idea-ext" version "0.7"
+    id "com.github.johnrengelman.shadow" version "4.0.4"
+    id 'application'
 }
 
-group 'me.jackgoldsworth.vision'
+group 'me.jackgoldsworth.webapp'
 version '0.1'
+ext.ktorversion = "1.3.0"
+mainClassName = 'me.jackgoldsworth.webapp.MainKt'
 
 repositories {
     mavenCentral()
-    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    compile group: 'org.json', name: 'json', version: '20180813'
-    compile 'se.michaelthelin.spotify:spotify-web-api-java:2.1.0'
-    compile 'org.spockframework.spock:spock-core:spock-1.3'
-    compile 'com.google.cloud:google-cloud-speech:1.13.0'
+    compile "io.ktor:ktor-server-netty:${ktorversion}"
+    compile "io.ktor:ktor-locations:${ktorversion}"
+    compile "io.ktor:ktor-auth:${ktorversion}"
+    compile project(':core')
 }
 
 compileKotlin {
@@ -45,11 +48,17 @@ idea {
     project {
         settings {
             runConfigurations {
-                "Run"(Application) {
-                    mainClass = "me.jackgoldsworth.vision.Vision"
+                "Run Web-App"(Application) {
+                    mainClass = "me.jackgoldsworth.webapp.MainKt"
                     moduleName = "Vision.main"
                 }
             }
         }
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'me.jackgoldsworth.webapp.MainKt'
     }
 }

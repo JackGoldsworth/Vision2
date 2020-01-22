@@ -1,0 +1,17 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+group 'me.jackgoldsworth.vision'
+version '0.1'
+
+repositories {
+    jcenter()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    compile group: 'org.json', name: 'json', version: '20180813'
+    compile 'se.michaelthelin.spotify:spotify-web-api-java:2.1.0'
+    compile 'com.google.cloud:google-cloud-speech:1.13.0'
+}
