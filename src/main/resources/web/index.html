@@ -28,8 +28,8 @@
         <div class="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
-                    <a class="button is-primary" href="credentials">
-                        <strong>Credentials</strong>
+                    <a class="button is-success" onclick="clickLogin()">
+                        <strong>Login to Spotify</strong>
                     </a>
                 </div>
             </div>
@@ -40,3 +40,29 @@
 <h1 style="text-align: center; font-size: 5vh; margin-top: 5vh">Current Task</h1>
 
 </body>
+
+<script>
+    function clickLogin() {
+        let scopes = 'user-read-private user-read-email';
+        fetch('credentials/settings').then(function (response) {
+            return response.json();
+        }).then(function (myJson) {
+            let json = JSON.stringify(myJson);
+            json = JSON.parse(json);
+            window.location.replace('https://accounts.spotify.com/authorize' +
+                '?response_type=token' +
+                '&client_id=' + json["client_id"] +
+                (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
+                '&redirect_uri=' + encodeURIComponent(json["redirect_uri"]));
+        });
+    }
+
+    function onLoad() {
+        if(window.location.hash) {
+            fetch("credentials", {
+                method: "POST",
+                body: window.location.hash.toString()
+            });
+        }
+    }
+</script>

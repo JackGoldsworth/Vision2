@@ -7,27 +7,29 @@ import io.ktor.request.*
 import io.ktor.response.respondText
 import io.ktor.routing.Route
 import io.ktor.routing.get
+import io.ktor.routing.post
 import org.apache.http.HttpHeaders
 import org.apache.http.client.methods.RequestBuilder
 import org.apache.http.impl.client.HttpClients
+import org.apache.http.util.EntityUtils
 
 fun Route.enterCredentials() {
-    static("/credentials") {
+    static("credentials") {
         defaultResource("credentials.html", "web")
     }
-    get("cred") {
+    get("credentials/settings") {
         call.respondText(javaClass.classLoader.getResource("settings.json")!!.readText())
     }
-    get("code") {
-        // TODO: FIX
-        val uri = call.request.uri
-        val auth = uri.substring(uri.indexOf("access_token="), uri.indexOf("&token_type"))
+    post("credentials") {
+        // TODO: Eventually switch this to ktor http calls.
+        val uri = call.receiveText()
+        val auth = uri.substring(uri.indexOf("access_token=") + 13, uri.indexOf("&token_type"))
         val client = HttpClients.createDefault()
         val request = RequestBuilder.get()
             .setUri("https://api.spotify.com/v1/me/player/devices")
             .setHeader(HttpHeaders.AUTHORIZATION, "Bearer $auth")
             .build()
         val response = client.execute(request)
-        println(response.entity)
+        val responseString = EntityUtils.toString(response.entity)
     }
 }
