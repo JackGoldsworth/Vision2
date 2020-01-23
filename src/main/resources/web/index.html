@@ -34,8 +34,21 @@
     </div>
 </nav>
 <!-- Body -->
-<h1 style="text-align: center; font-size: 5vh; margin-top: 5vh">Current Task</h1>
-
+<div class="container">
+    <div>
+        <h1 style="text-align: center; font-size: 5vh; margin-top: 5vh">Current Task</h1>
+    </div>
+    <div class="field has-addons" style="margin-top: 7vh">
+        <div class="control is-expanded">
+            <input id="search" class="input " type="text" placeholder="Enter a command">
+        </div>
+        <div class="control">
+            <a class="button is-info" onclick="sendSearch()">
+                Search
+            </a>
+        </div>
+    </div>
+</div>
 </body>
 
 <script>
@@ -55,11 +68,19 @@
     }
 
     function onLoad() {
-        if(window.location.hash) {
+        if (window.location.hash) {
             fetch("http://localhost:8080", {
                 method: "POST",
                 body: window.location.hash.toString()
             });
         }
+    }
+
+    function sendSearch() {
+        let input = document.getElementById("search").value;
+        fetch("http://localhost:8080/command", {
+            method: "POST",
+            body: input
+        });
     }
 </script>
