@@ -12,35 +12,29 @@ import io.ktor.routing.post
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
+import me.jackgoldsworth.webapp.Main.authToken
 import me.jackgoldsworth.webapp.controller.enterCredentials
-import org.apache.http.HttpHeaders
-import org.apache.http.client.methods.RequestBuilder
-import org.apache.http.impl.client.HttpClients
-import org.apache.http.util.EntityUtils
+import me.jackgoldsworth.webapp.controller.spotify
+
+object Main {
+    var authToken: String? = null
+}
 
 fun main(args: Array<String>) {
     embeddedServer(Netty, port = 8080, module = Application::mainModule).start(wait = true)
 }
 
 fun Application.mainModule() {
-    install(DefaultHeaders)
-    install(Authentication)
     routing {
         enterCredentials()
+        spotify()
         static("/") {
             defaultResource("index.html", "web")
         }
         post {
             // TODO: Eventually switch this to ktor http calls.
             val uri = call.receiveText()
-            val auth = uri.substring(uri.indexOf("access_token=") + 13, uri.indexOf("&token_type"))
-            val client = HttpClients.createDefault()
-            val request = RequestBuilder.get()
-                .setUri("https://api.spotify.com/v1/me/player/devices")
-                .setHeader(HttpHeaders.AUTHORIZATION, "Bearer $auth")
-                .build()
-            val response = client.execute(request)
-            val responseString = EntityUtils.toString(response.entity)
+            authToken = uri.substring(uri.indexOf("access_token=") + 13, uri.indexOf("&token_type"))
         }
     }
 }
