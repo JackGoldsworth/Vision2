@@ -13,12 +13,15 @@ import me.jackgoldsworth.webapp.Main.authToken
 import me.jackgoldsworth.webapp.controller.command
 import me.jackgoldsworth.webapp.controller.enterCredentials
 import me.jackgoldsworth.webapp.controller.spotify
+import me.jackgoldsworth.webapp.utils.FileUtils
 
 object Main {
     var authToken: String? = null
 }
 
 fun main(args: Array<String>) {
+    FileUtils.createAuthFile()
+    authToken = FileUtils.loadSpotifyAuth()
     embeddedServer(Netty, port = 8080, module = Application::mainModule).start(wait = true)
 }
 
@@ -31,9 +34,9 @@ fun Application.mainModule() {
             defaultResource("index.html", "web")
         }
         post {
-            // TODO: Eventually switch this to ktor http calls.
             val uri = call.receiveText()
             authToken = uri.substring(uri.indexOf("access_token=") + 13, uri.indexOf("&token_type"))
+            FileUtils.saveAuthToken("spotify", authToken!!)
         }
     }
 }

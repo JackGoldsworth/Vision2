@@ -10,3 +10,5 @@ out
 *.class
 
 credentials.json
+
+auth.json
