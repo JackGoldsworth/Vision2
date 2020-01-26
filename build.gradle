@@ -25,6 +25,7 @@ dependencies {
     compile "io.ktor:ktor-server-netty:${ktorversion}"
     compile "io.ktor:ktor-locations:${ktorversion}"
     compile "io.ktor:ktor-auth:${ktorversion}"
+    compile("ch.qos.logback:logback-classic:1.2.3")
     compile project(':core')
 }
 
