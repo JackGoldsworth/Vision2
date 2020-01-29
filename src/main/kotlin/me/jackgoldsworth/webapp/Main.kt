@@ -13,6 +13,7 @@ import me.jackgoldsworth.webapp.Main.authToken
 import me.jackgoldsworth.webapp.controller.command
 import me.jackgoldsworth.webapp.controller.enterCredentials
 import me.jackgoldsworth.webapp.controller.spotify
+import me.jackgoldsworth.webapp.controller.task
 import me.jackgoldsworth.webapp.utils.FileUtils
 
 object Main {
@@ -30,6 +31,7 @@ fun Application.mainModule() {
         enterCredentials()
         spotify()
         command()
+        task()
         static("/") {
             defaultResource("index.html", "web")
         }

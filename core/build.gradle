@@ -1,5 +1,6 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm'
+    id 'kotlin-kapt'
 }
 
 group 'me.jackgoldsworth.vision'
@@ -12,6 +13,8 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "com.google.auto.service:auto-service:1.0-rc4"
+    kapt "com.google.auto.service:auto-service:1.0-rc4"
     compile group: 'org.json', name: 'json', version: '20180813'
     compile 'se.michaelthelin.spotify:spotify-web-api-java:2.1.0'
     compile 'com.google.cloud:google-cloud-speech:1.13.0'
