@@ -7,12 +7,16 @@ plugins {
     id "org.jetbrains.gradle.plugin.idea-ext" version "0.7"
     id "com.github.johnrengelman.shadow" version "4.0.4"
     id 'application'
+    id 'org.springframework.boot' version '2.1.6.RELEASE'
+    id "com.moowork.node" version "1.3.1"
 }
+
+apply plugin: "com.moowork.node"
 
 group 'me.jackgoldsworth.webapp'
 version '0.1'
 ext.ktorversion = "1.3.0"
-mainClassName = 'me.jackgoldsworth.webapp.MainKt'
+mainClassName = 'me.jackgoldsworth.webapp.Application'
 
 repositories {
     mavenCentral()
@@ -20,12 +24,10 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    compile group: 'org.json', name: 'json', version: '20180813'
-    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.10'
-    compile "io.ktor:ktor-server-netty:${ktorversion}"
-    compile "io.ktor:ktor-locations:${ktorversion}"
-    compile "io.ktor:ktor-auth:${ktorversion}"
-    compile("ch.qos.logback:logback-classic:1.2.3")
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.2.4.RELEASE'
+    implementation 'org.json:json:20180813'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.10'
+    compile 'org.jetbrains.kotlin:kotlin-reflect:1.1.51'
     compile project(':core')
 }
 
@@ -51,9 +53,9 @@ idea {
     project {
         settings {
             runConfigurations {
-                "Run Web-App"(Application) {
-                    mainClass = "me.jackgoldsworth.webapp.MainKt"
-                    moduleName = "Vision.main"
+                "Run Web-App"(Gradle) {
+                    taskNames = ["buildReact", "bootRun"]
+                    projectPath = file("Vision2").parentFile.absolutePath
                 }
             }
         }
@@ -62,6 +64,20 @@ idea {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'me.jackgoldsworth.webapp.MainKt'
+        attributes 'Main-Class': 'me.jackgoldsworth.webapp.Application'
     }
 }
+
+node {
+    download = true
+    workDir = file("${project.buildDir}/front-end/")
+    nodeModulesDir = file("${project.projectDir}/front-end/node_modules/")
+}
+
+task buildReact(type: NpmTask) {
+    args = ['run', 'webpack']
+}
+
+buildReact.dependsOn(npm_install)
+
+clean.delete << file('node_modules')
