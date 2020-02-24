@@ -7,6 +7,7 @@ import org.springframework.boot.runApplication
 open class Application {
 
     companion object {
+        var authToken: String? = null
 
         @JvmStatic
         fun main(args: Array<String>) {

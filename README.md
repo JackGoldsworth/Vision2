@@ -2,8 +2,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=me.jackgoldsworth.vision&metric=alert_status)](https://sonarcloud.io/dashboard?id=me.jackgoldsworth.vision)
 
 # Vision 2
-Vision 2 is a home automation tool with a web app interface built with Ktor. The name comes from the original version of vision that I made a couple years back, which was based in Python and had no interface other than the command line and voice.
-
+Vision 2 is a home automation tool with a web app interface built with Spring Boot and React. The name comes from the original version of vision that I made a couple years back, which was based in Python and had no interface other than the command line and voice.
 
 ## What can be done:
 - [x] User various functions of the spotify API
