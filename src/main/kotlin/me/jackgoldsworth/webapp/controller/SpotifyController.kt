@@ -1,27 +1,21 @@
 package me.jackgoldsworth.webapp.controller
 
-import io.ktor.application.call
-import io.ktor.routing.Route
-import io.ktor.routing.get
-import me.jackgoldsworth.webapp.Main
-import me.jackgoldsworth.webapp.SpotifyRequests
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RestController
 
-fun Route.spotify() {
-    get("spotify/volume") {
-        val volume =
-            call.request.queryParameters["volume"]?.toInt() ?: throw IllegalArgumentException("Volume query not found")
-        val response = SpotifyRequests.setVolume(
-            volume,
-            Main.authToken ?: throw IllegalStateException("Can't use a spotify command without logging in.")
-        )
-        call.application.environment.log.info("Changing the volume returned a status of: $response")
+@RestController
+@RequestMapping("/v1/spotify")
+class SpotifyController {
+
+    @GetMapping("/volume")
+    fun changeVolume(@RequestParam("volume") volume: Int) {
+
     }
-    get("spotify/track") {
-        val track = call.request.queryParameters["track"] ?: throw IllegalArgumentException("Track query not found")
-        val response = SpotifyRequests.setTrack(
-            track,
-            Main.authToken ?: throw IllegalStateException("Can't use a spotify command without logging in.")
-        )
-        call.application.environment.log.info("Playing a track returned a status of: $response")
+
+    @GetMapping("/track")
+    fun playTrack(@RequestParam("id") id: String) {
+
     }
 }
