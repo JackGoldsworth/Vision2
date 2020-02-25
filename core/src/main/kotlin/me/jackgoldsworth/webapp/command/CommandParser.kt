@@ -1,10 +1,7 @@
 package me.jackgoldsworth.webapp.command
 
-import me.jackgoldsworth.webapp.api.Inject
-
 class CommandParser(val command: String, val auth: String?) {
 
-    @Inject("Jack")
     val test = ""
 
     companion object {

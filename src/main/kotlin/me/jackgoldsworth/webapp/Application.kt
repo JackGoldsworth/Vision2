@@ -1,5 +1,6 @@
 package me.jackgoldsworth.webapp
 
+import me.jackgoldsworth.webapp.utils.FileUtils
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
@@ -11,6 +12,8 @@ open class Application {
 
         @JvmStatic
         fun main(args: Array<String>) {
+            FileUtils.createAuthFile()
+            authToken = FileUtils.loadSpotifyAuth()
             runApplication<Application>(*args)
         }
     }
