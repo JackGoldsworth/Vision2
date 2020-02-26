@@ -5,7 +5,6 @@ import me.jackgoldsworth.webapp.command.Command
 import me.jackgoldsworth.webapp.command.CommandParser
 import me.jackgoldsworth.webapp.command.ImageProvider
 
-@Command.Register("Play Song", "Plays a song")
 class PlaySongCommand(parser: CommandParser) : Command(parser), ImageProvider {
 
     lateinit var img: String

@@ -24,7 +24,7 @@ class CommandController {
             TaskHandler.currentTask = parsedCommand
             return ResponseEntity.ok("")
         }
-        logger.debug("Command: $command not found.")
+        logger.info("Command: $command not found.")
         return ResponseEntity.badRequest().body("Command not found.")
     }
 }

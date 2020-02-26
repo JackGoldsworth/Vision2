@@ -13,7 +13,7 @@ class AuthController {
 
     @GetMapping("/credentials")
     fun spotifyLogin(): String {
-        logger.debug("Loading spotify settings.")
+        logger.info("Loading spotify settings.")
         return javaClass.classLoader.getResource("settings.json")!!.readText()
     }
 }

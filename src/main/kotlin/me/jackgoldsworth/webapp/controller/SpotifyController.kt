@@ -2,6 +2,7 @@ package me.jackgoldsworth.webapp.controller
 
 import me.jackgoldsworth.webapp.Application
 import me.jackgoldsworth.webapp.SpotifyRequests
+import me.jackgoldsworth.webapp.SpotifyTrack
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -22,7 +23,7 @@ class SpotifyController {
                 volume.toInt(),
                 Application.authToken ?: throw IllegalStateException("Can't use a spotify command without logging in.")
             )
-            logger.debug("Changed the spotify volume to $volume")
+            logger.info("Changed the spotify volume to $volume")
             return ResponseEntity.ok("")
         }
         return ResponseEntity.badRequest().body("Invalid Query Parameters.")
@@ -34,10 +35,20 @@ class SpotifyController {
             SpotifyRequests.setTrack(
                 track,
                 Application.authToken ?: throw IllegalStateException("Can't use a spotify command without logging in.")
-            )
+            ).imageUrl
             logger.debug("Switching the track to: $track")
             return ResponseEntity.ok("")
         }
         return ResponseEntity.badRequest().body("Invalid Query Parameters.")
+    }
+
+    @GetMapping("/track")
+    fun getTrackInfo(): ResponseEntity<SpotifyTrack> {
+        val track = SpotifyRequests.currentTrack
+        if (track != null) {
+            logger.info("Switching the track to: $track")
+            return ResponseEntity.ok(track)
+        }
+        return ResponseEntity.badRequest().build()
     }
 }
