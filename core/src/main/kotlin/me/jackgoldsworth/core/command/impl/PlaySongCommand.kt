@@ -26,7 +26,7 @@ class PlaySongCommand: Command() {
             for (i in 2 until args!!.size) {
                 songName.append(args!![i], " ")
             }
-            SpotifyRequests.setTrack(songName.toString(), extras!!["key"] ?: error("Auth was null"))
+            SpotifyRequests.setTrack(songName.toString(), extras!!["auth"] ?: error("Auth was null"))
         }
     }
 }
