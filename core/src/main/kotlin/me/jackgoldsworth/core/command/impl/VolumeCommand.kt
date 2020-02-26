@@ -7,9 +7,6 @@ import me.jackgoldsworth.core.processor.RegisterCommand
 @RegisterCommand
 class VolumeCommand: Command() {
 
-    var args: List<String>? = null
-    var extras: Map<String, String>? = null
-
     override fun runCommand(args: List<String>, extras: Map<String, String>) {
         this.args = args
         this.extras = extras
@@ -22,7 +19,7 @@ class VolumeCommand: Command() {
 
     override fun run() {
         if(args != null && extras != null) {
-            SpotifyRequests.setVolume(args!![2].toInt(), extras!!["auth"] ?: error("Auth was null"))
+            SpotifyRequests.setVolume(args!![4].toInt(), extras!!["auth"] ?: error("Auth was null"))
         }
     }
 }

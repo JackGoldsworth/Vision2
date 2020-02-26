@@ -7,9 +7,6 @@ import me.jackgoldsworth.core.processor.RegisterCommand
 @RegisterCommand
 class PlaySongCommand: Command() {
 
-    var args: List<String>? = null
-    var extras: Map<String, String>? = null
-
     override fun runCommand(args: List<String>, extras: Map<String, String>) {
         this.args = args
         this.extras = extras

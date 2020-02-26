@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom';
 
 const axios = require('axios').default;
 
@@ -8,7 +7,6 @@ export class CommandPrompt extends React.Component {
     render() {
         return (
             <div className="container">
-                <div id="current-track"></div>
                 <div>
                     <h1 style={{textAlign: 'center', fontSize: 5 + 'vh', marginTop: 5 + 'vh'}}>Current Task</h1>
                 </div>
@@ -25,10 +23,6 @@ export class CommandPrompt extends React.Component {
             </div>
         )
     }
-
-    componentDidMount() {
-        getSpotifyImage()
-    }
 }
 
 const sendSearch = () => {
@@ -39,23 +33,4 @@ const sendSearch = () => {
     ).then(() => {
         window.location.reload();
     });
-}
-
-const getSpotifyImage = () => {
-    axios.get("http://localhost:8080/v1/spotify/info",
-        {headers: {"Content-Type": "application/json"}})
-        .then((response) => {
-            console.log(response.data)
-            ReactDOM.render(
-                <div>
-                    <img src={response.data["imageUrl"]} alt={'Spotify Track'}
-                         style={{display: "block", margin: "0 auto"}}/>
-                    <p style={{
-                        textAlign: 'center',
-                        fontSize: 3 + 'vh'
-                    }}>{response.data["name"]} by {response.data["artist"]}</p>
-                </div>,
-                document.getElementById('current-track')
-            );
-        });
 }

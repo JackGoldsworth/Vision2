@@ -1,15 +1,37 @@
-import React from "react";
-const Client = require('node-rest-client').Client;
-let client = new Client()
+import React from 'react'
+import ReactDOM from 'react-dom';
 
-export const CurrentTask = () => {
-    return (
-        <div>
+const axios = require('axios').default;
 
-        </div>
-    )
+export class CurrentTask extends React.Component {
+
+    render() {
+        return (
+            <div id="current-track" style={{marginTop: 5 + 'vh'}}>
+
+            </div>
+        )
+    }
+
+    componentDidMount() {
+        getSpotifyImage()
+    }
 }
 
 const getSpotifyImage = () => {
-    client.get("")
+    axios.get("http://localhost:8080/v1/spotify/info",
+        {headers: {"Content-Type": "application/json"}})
+        .then((response) => {
+            ReactDOM.render(
+                <div>
+                    <img src={response.data["imageUrl"]} alt={'Spotify Track'}
+                         style={{display: "block", margin: "0 auto"}}/>
+                    <p style={{
+                        textAlign: 'center',
+                        fontSize: 3 + 'vh'
+                    }}>{response.data["name"]} by {response.data["artist"]}</p>
+                </div>,
+                document.getElementById('current-track')
+            );
+        });
 }
