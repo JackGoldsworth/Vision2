@@ -1,3 +1,8 @@
 package me.jackgoldsworth.webapp.command
 
-abstract class Command(val parser: CommandParser) : Runnable
+abstract class Command : Runnable {
+
+    abstract fun runCommand(args: List<String>, extras: Map<String, String>)
+
+    abstract fun getCommandPrefix(): String
+}

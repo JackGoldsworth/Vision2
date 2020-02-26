@@ -2,13 +2,27 @@ package me.jackgoldsworth.webapp.command.impl
 
 import me.jackgoldsworth.webapp.SpotifyRequests
 import me.jackgoldsworth.webapp.command.Command
-import me.jackgoldsworth.webapp.command.CommandParser
+import me.jackgoldsworth.webapp.processor.RegisterCommand
 
-class VolumeCommand(parser: CommandParser) : Command(parser) {
+@RegisterCommand
+class VolumeCommand: Command() {
 
-    private val args = parser.command.split(" ")
+    var args: List<String>? = null
+    var extras: Map<String, String>? = null
+
+    override fun runCommand(args: List<String>, extras: Map<String, String>) {
+        this.args = args
+        this.extras = extras
+        this.run()
+    }
+
+    override fun getCommandPrefix(): String {
+        return "Spotify set volume to"
+    }
 
     override fun run() {
-        SpotifyRequests.setVolume(args[2].toInt(), parser.auth ?: error("Auth was null"))
+        if(args != null && extras != null) {
+            SpotifyRequests.setVolume(args!![2].toInt(), extras!!["auth"] ?: error("Auth was null"))
+        }
     }
 }

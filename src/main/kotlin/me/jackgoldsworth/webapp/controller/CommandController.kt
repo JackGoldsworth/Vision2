@@ -20,7 +20,7 @@ class CommandController {
     fun sendCommand(@RequestBody command: String): ResponseEntity<String> {
         val parsedCommand = CommandParser(command, Application.authToken).parse()
         if (parsedCommand != null) {
-            parsedCommand.run()
+            parsedCommand.runCommand(command.split(" "), mapOf("auth" to Application.authToken!!))
             TaskHandler.currentTask = parsedCommand
             return ResponseEntity.ok("")
         }
