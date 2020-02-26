@@ -1,4 +1,4 @@
-package me.jackgoldsworth.webapp.utils
+package me.jackgoldsworth.core.utils
 
 /**
  * @author Jack Goldsworth

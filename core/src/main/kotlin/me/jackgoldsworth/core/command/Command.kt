@@ -1,4 +1,4 @@
-package me.jackgoldsworth.webapp.command
+package me.jackgoldsworth.core.command
 
 abstract class Command : Runnable {
 

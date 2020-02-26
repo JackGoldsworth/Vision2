@@ -1,8 +1,8 @@
 package me.jackgoldsworth.webapp.controller
 
 import me.jackgoldsworth.webapp.Application
-import me.jackgoldsworth.webapp.SpotifyRequests
-import me.jackgoldsworth.webapp.SpotifyTrack
+import me.jackgoldsworth.core.SpotifyRequests
+import me.jackgoldsworth.core.SpotifyTrack
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/v1/spotify")
 class SpotifyController {
 
-    private val logger = LoggerFactory.getLogger(SpotifyController::class.java)
+    private val logger = LoggerFactory.getLogger(
+        SpotifyController::class.java)
 
     @GetMapping("/volume")
     fun changeVolume(@RequestParam("volume") volume: String): ResponseEntity<String> {
@@ -42,7 +43,7 @@ class SpotifyController {
         return ResponseEntity.badRequest().body("Invalid Query Parameters.")
     }
 
-    @GetMapping("/track")
+    @GetMapping("/info")
     fun getTrackInfo(): ResponseEntity<SpotifyTrack> {
         val track = SpotifyRequests.currentTrack
         if (track != null) {

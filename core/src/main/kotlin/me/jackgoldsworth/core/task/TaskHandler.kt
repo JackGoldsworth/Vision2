@@ -1,6 +1,6 @@
-package me.jackgoldsworth.webapp.task
+package me.jackgoldsworth.core.task
 
-import me.jackgoldsworth.webapp.command.Command
+import me.jackgoldsworth.core.command.Command
 
 object TaskHandler {
 

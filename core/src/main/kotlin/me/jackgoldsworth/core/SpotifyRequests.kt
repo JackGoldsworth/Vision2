@@ -1,4 +1,4 @@
-package me.jackgoldsworth.webapp
+package me.jackgoldsworth.core
 
 import com.google.gson.JsonParser
 import org.apache.http.HttpHeaders

@@ -1,8 +1,8 @@
 package me.jackgoldsworth.webapp.controller
 
 import me.jackgoldsworth.webapp.Application
-import me.jackgoldsworth.webapp.command.CommandParser
-import me.jackgoldsworth.webapp.task.TaskHandler
+import me.jackgoldsworth.core.command.CommandParser
+import me.jackgoldsworth.core.task.TaskHandler
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/v1")
 class CommandController {
 
-    private val logger = LoggerFactory.getLogger(CommandController::class.java)
+    private val logger = LoggerFactory.getLogger(
+        CommandController::class.java)
 
     @PostMapping("/command")
     fun sendCommand(@RequestBody command: String): ResponseEntity<String> {

@@ -42,7 +42,7 @@ const sendSearch = () => {
 }
 
 const getSpotifyImage = () => {
-    axios.get("http://localhost:8080/v1/spotify/track",
+    axios.get("http://localhost:8080/v1/spotify/info",
         {headers: {"Content-Type": "application/json"}})
         .then((response) => {
             console.log(response.data)

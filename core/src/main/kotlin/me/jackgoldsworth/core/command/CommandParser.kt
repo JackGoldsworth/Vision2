@@ -1,7 +1,7 @@
-package me.jackgoldsworth.webapp.command
+package me.jackgoldsworth.core.command
 
-import me.jackgoldsworth.webapp.command.impl.PlaySongCommand
-import me.jackgoldsworth.webapp.command.impl.VolumeCommand
+import me.jackgoldsworth.core.command.impl.PlaySongCommand
+import me.jackgoldsworth.core.command.impl.VolumeCommand
 
 class CommandParser(val command: String, val auth: String?) {
 

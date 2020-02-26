@@ -1,10 +1,8 @@
-package me.jackgoldsworth.webapp.command.impl
+package me.jackgoldsworth.core.command.impl
 
-import me.jackgoldsworth.webapp.SpotifyRequests
-import me.jackgoldsworth.webapp.command.Command
-import me.jackgoldsworth.webapp.processor.RegisterCommand
+import me.jackgoldsworth.core.SpotifyRequests
+import me.jackgoldsworth.core.command.Command
 
-@RegisterCommand
 class PlaySongCommand: Command() {
 
     var args: List<String>? = null

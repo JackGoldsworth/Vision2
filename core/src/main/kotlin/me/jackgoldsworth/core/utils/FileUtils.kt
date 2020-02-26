@@ -1,4 +1,4 @@
-package me.jackgoldsworth.webapp.utils
+package me.jackgoldsworth.core.utils
 
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
