@@ -4,10 +4,13 @@
 # Vision 2
 Vision 2 is a home automation tool with a web app interface built with Spring Boot and React. The name comes from the original version of vision that I made a couple years back, which was based in Python and had no interface other than the command line and voice.
 
+### Current UI
+![alt text](example.png "current ui")
+
 ## What can be done:
 - [x] User various functions of the spotify API
+- [x] Use text to interact with the assistant.
 - [ ] Use voice to interact with the assistant.
-- [ ] Use text to interact with the assistant.
 - [ ] Open and close user programs.
 - [ ] Interface with lights and smart plugins (Not sure how possible)
 
