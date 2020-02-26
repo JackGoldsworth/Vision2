@@ -2,7 +2,9 @@ package me.jackgoldsworth.core.command.impl
 
 import me.jackgoldsworth.core.SpotifyRequests
 import me.jackgoldsworth.core.command.Command
+import me.jackgoldsworth.core.processor.RegisterCommand
 
+@RegisterCommand
 class VolumeCommand: Command() {
 
     var args: List<String>? = null
