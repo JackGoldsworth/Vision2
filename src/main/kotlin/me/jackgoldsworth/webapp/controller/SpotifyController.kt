@@ -47,7 +47,7 @@ class SpotifyController {
     fun getTrackInfo(): ResponseEntity<SpotifyTrack> {
         val track = SpotifyRequests.currentTrack
         if (track != null) {
-            logger.info("Switching the track to: $track")
+            logger.info("Switching the track to: ${track.name}")
             return ResponseEntity.ok(track)
         }
         return ResponseEntity.badRequest().build()

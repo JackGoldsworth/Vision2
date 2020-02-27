@@ -13,6 +13,10 @@ class VolumeCommand: Command() {
         this.run()
     }
 
+    override fun init() {
+        this.commandName = "Change Volume"
+    }
+
     override fun getCommandPrefix(): String {
         return "Spotify set volume to"
     }

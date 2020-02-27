@@ -1,11 +1,11 @@
 package me.jackgoldsworth.core.command.impl
 
-import me.jackgoldsworth.core.SpotifyRequests
 import me.jackgoldsworth.core.command.Command
+import me.jackgoldsworth.core.command.CommandParser
 import me.jackgoldsworth.core.processor.RegisterCommand
 
 @RegisterCommand
-class PlaySongCommand: Command() {
+class ListCommand: Command() {
 
     override fun runCommand(args: List<String>, extras: Map<String, String>) {
         this.args = args
@@ -14,20 +14,18 @@ class PlaySongCommand: Command() {
     }
 
     override fun init() {
-        this.commandName = "Play Song"
+        this.commandName = "List Commands"
     }
 
     override fun getCommandPrefix(): String {
-        return "Spotify play"
+        return "list commands"
     }
 
     override fun run() {
-        if(args != null && extras != null) {
-            val songName = StringBuilder()
-            for (i in 2 until args!!.size) {
-                songName.append(args!![i], " ")
-            }
-            SpotifyRequests.setTrack(songName.toString(), extras!!["auth"] ?: error("Auth was null"))
+        var str = ""
+        CommandParser.commands.forEach { (t, u) ->
+            str += "${u.commandName}, Prefix: $t , "
         }
+        this.response = str
     }
 }

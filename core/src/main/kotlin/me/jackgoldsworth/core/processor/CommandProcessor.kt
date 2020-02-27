@@ -12,6 +12,7 @@ class CommandProcessor {
             if(it.isAnnotationPresent(RegisterCommand::class.java)) {
                 println("Registering Command: ${it.simpleName}")
                 val clazz = it.newInstance()
+                clazz.init()
                 CommandParser.commands[clazz.getCommandPrefix()] = clazz
             }
         }
