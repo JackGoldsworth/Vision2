@@ -2,8 +2,10 @@ package me.jackgoldsworth.webapp
 
 import me.jackgoldsworth.core.processor.CommandProcessor
 import me.jackgoldsworth.core.utils.FileUtils
+import me.jackgoldsworth.core.utils.SpeechUtils
+import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+
 
 @SpringBootApplication
 open class Application {
@@ -15,8 +17,9 @@ open class Application {
         fun main(args: Array<String>) {
             FileUtils.createAuthFile()
             authToken = FileUtils.loadSpotifyAuth()
+            SpeechUtils.runSpeech()
             CommandProcessor().run()
-            runApplication<Application>(*args)
+            SpringApplication.run(Application::class.java)
         }
     }
 }
