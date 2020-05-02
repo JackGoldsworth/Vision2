@@ -1,9 +1,7 @@
 package me.jackgoldsworth.webapp.controller
 
-import me.jackgoldsworth.core.command.Command
 import me.jackgoldsworth.webapp.Application
-import me.jackgoldsworth.core.command.CommandParser
-import me.jackgoldsworth.core.task.TaskHandler
+import me.jackgoldsworth.webapp.core.command.CommandParser
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -14,14 +12,13 @@ import org.springframework.web.bind.annotation.*
 class CommandController {
 
     private val logger = LoggerFactory.getLogger(CommandController::class.java)
-    private var currentCommand: Command? = null
 
     @PostMapping("/command")
     fun sendCommand(@RequestBody command: String): ResponseEntity<String> {
-        currentCommand = CommandParser(command, Application.authToken).parse()
+        CommandParser(command, Application.authToken).parse()
+        val currentCommand = CommandParser.currentCommand
         if (currentCommand != null) {
-            currentCommand!!.runCommand(command.split(" "), mapOf("auth" to Application.authToken!!))
-            TaskHandler.currentTask = currentCommand!!
+            currentCommand.runCommand(command.split(" "), mapOf("auth" to Application.authToken!!))
             return ResponseEntity.ok("")
         }
         logger.info("Command: $command not found.")
@@ -30,14 +27,10 @@ class CommandController {
 
     @GetMapping("/command/response")
     fun getCommandResponse(): ResponseEntity<String> {
-        if(currentCommand == null) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Current command is null.")
-        }
-        if(currentCommand?.response != null) {
-            val response = currentCommand?.response!!
-            // Now that the command is over, get rid of the current command.
-            currentCommand = null
-            return ResponseEntity.ok(response)
+        val currentCommand = CommandParser.currentCommand
+            ?: return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Current command is null.")
+        if (currentCommand.response != null) {
+            return ResponseEntity.ok(currentCommand.response!!)
         }
         return ResponseEntity.ok("")
     }

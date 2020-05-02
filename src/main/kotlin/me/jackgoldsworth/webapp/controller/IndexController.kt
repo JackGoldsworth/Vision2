@@ -1,7 +1,7 @@
 package me.jackgoldsworth.webapp.controller
 
 import me.jackgoldsworth.webapp.Application.Companion.authToken
-import me.jackgoldsworth.core.utils.FileUtils
+import me.jackgoldsworth.webapp.core.utils.FileUtils
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody

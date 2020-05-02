@@ -1,8 +1,8 @@
 package me.jackgoldsworth.webapp.controller
 
 import me.jackgoldsworth.webapp.Application
-import me.jackgoldsworth.core.SpotifyRequests
-import me.jackgoldsworth.core.SpotifyTrack
+import me.jackgoldsworth.webapp.core.SpotifyRequests
+import me.jackgoldsworth.webapp.core.SpotifyTrack
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping

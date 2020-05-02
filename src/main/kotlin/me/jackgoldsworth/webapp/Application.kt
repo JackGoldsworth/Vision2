@@ -1,8 +1,8 @@
 package me.jackgoldsworth.webapp
 
-import me.jackgoldsworth.core.processor.CommandProcessor
-import me.jackgoldsworth.core.utils.FileUtils
-import me.jackgoldsworth.core.utils.SpeechUtils
+import me.jackgoldsworth.webapp.core.processor.CommandProcessor
+import me.jackgoldsworth.webapp.core.utils.FileUtils
+import me.jackgoldsworth.webapp.core.utils.SpeechUtils
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 

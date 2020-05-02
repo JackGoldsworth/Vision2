@@ -1,8 +1,8 @@
-package me.jackgoldsworth.core.command.impl
+package me.jackgoldsworth.webapp.core.command.impl
 
-import me.jackgoldsworth.core.SpotifyRequests
-import me.jackgoldsworth.core.command.Command
-import me.jackgoldsworth.core.processor.RegisterCommand
+import me.jackgoldsworth.webapp.core.SpotifyRequests
+import me.jackgoldsworth.webapp.core.command.Command
+import me.jackgoldsworth.webapp.core.processor.RegisterCommand
 
 @RegisterCommand
 class VolumeCommand: Command() {
