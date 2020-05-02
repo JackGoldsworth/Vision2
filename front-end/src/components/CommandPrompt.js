@@ -30,7 +30,5 @@ const sendSearch = () => {
     axios.post("http://localhost:8080/v1/command",
         input.toString(),
         {headers: {"Content-Type": "text/plain"}}
-    ).then(() => {
-        //window.location.reload();
-    });
+    )
 }

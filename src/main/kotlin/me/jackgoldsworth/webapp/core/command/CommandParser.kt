@@ -14,6 +14,7 @@ class CommandParser(val command: String, val auth: String?) {
                 return commands[it]
             }
         }
+        currentCommand = null
         return null
     }
 }
