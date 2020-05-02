@@ -10,7 +10,7 @@ Vision 2 is a home automation tool with a web app interface built with Spring Bo
 ## What can be done:
 - [x] User various functions of the spotify API
 - [x] Use text to interact with the assistant.
-- [ ] Use voice to interact with the assistant.
+- [x] Use voice to interact with the assistant.
 - [ ] Open and close user programs.
 - [ ] Interface with lights and smart plugins (Not sure how possible)
 
