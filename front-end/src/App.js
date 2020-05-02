@@ -10,13 +10,22 @@ let stompClient = null;
 
 export class App extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            taskName: "",
+            taskInfo: []
+        }
+        this.connect(this)
+    }
+
     render() {
         return (
             <div>
                 <NavBar/>
-                <CurrentTask/>
+                <CurrentTask taskInfo={this.state.taskInfo}/>
                 <CommandPrompt/>
-                <TaskResponse/>
+                <TaskResponse taskInfo={this.state.taskInfo}/>
             </div>
         )
     }
@@ -24,34 +33,21 @@ export class App extends React.Component {
     connect(bind) {
         let socket = new SockJS('/info');
         stompClient = Stomp.over(socket);
-        stompClient.connect({}, function (frame) {
+        stompClient.connect({}, function () {
             console.log('Connected');
             stompClient.subscribe('/results', function (messageOutput) {
                 let body = JSON.parse(messageOutput.body).body
-                let winner = null;
-                if (body.winner != null) {
-                    winner = body.winner.username
-                    axios.post("http://localhost:8080/parties/disband",
-                        getUsername(),
-                        {headers: {"Content-Type": "application/json"}}
-                    )
-                }
-
                 bind.setState({
-                    isCzar: getUsername() === body.czar,
-                    czar: body.czar,
-                    blackCard: body.blackCard.cardMessage,
-                    users: body.users,
-                    playedCards: body.playedCards,
-                    winner: winner
+                    taskName: body.taskName,
+                    taskInfo: body.taskInfo
                 });
             });
-            bind.sendMessage(getUsername())
+            bind.sendMessage()
         });
     }
 
-    sendMessage(message) {
-        stompClient.send("/info", {}, message);
+    sendMessage() {
+        stompClient.send("/info", {});
     }
 
     componentWillUnmount() {

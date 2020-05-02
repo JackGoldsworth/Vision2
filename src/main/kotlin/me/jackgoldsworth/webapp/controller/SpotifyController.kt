@@ -50,6 +50,6 @@ class SpotifyController {
             logger.info("Switching the track to: ${track.name}")
             return ResponseEntity.ok(track)
         }
-        return ResponseEntity.badRequest().build()
+        return ResponseEntity.ok().build()
     }
 }

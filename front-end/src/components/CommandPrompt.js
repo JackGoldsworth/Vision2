@@ -31,6 +31,6 @@ const sendSearch = () => {
         input.toString(),
         {headers: {"Content-Type": "text/plain"}}
     ).then(() => {
-        window.location.reload();
+        //window.location.reload();
     });
 }

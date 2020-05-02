@@ -1,5 +1,6 @@
 package me.jackgoldsworth.webapp.controller
 
+import me.jackgoldsworth.webapp.core.command.CommandParser
 import me.jackgoldsworth.webapp.model.TaskInfo
 import org.springframework.http.ResponseEntity
 import org.springframework.messaging.handler.annotation.MessageMapping
@@ -11,7 +12,11 @@ class WebSocketController {
 
     @MessageMapping("/info")
     @SendTo("/results")
-    fun getInfo(username: String?): ResponseEntity<TaskInfo>? {
-        return null
+    fun getInfo(): ResponseEntity<TaskInfo>? {
+        val info = CommandParser.currentCommand?.taskInfo
+        if (info != null) {
+            return ResponseEntity.ok(info)
+        }
+        return ResponseEntity.noContent().build()
     }
 }

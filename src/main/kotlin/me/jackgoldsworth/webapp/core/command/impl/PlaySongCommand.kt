@@ -3,6 +3,7 @@ package me.jackgoldsworth.webapp.core.command.impl
 import me.jackgoldsworth.webapp.core.SpotifyRequests
 import me.jackgoldsworth.webapp.core.command.Command
 import me.jackgoldsworth.webapp.core.processor.RegisterCommand
+import me.jackgoldsworth.webapp.model.TaskInfo
 
 @RegisterCommand
 class PlaySongCommand: Command() {
@@ -27,7 +28,12 @@ class PlaySongCommand: Command() {
             for (i in 2 until args!!.size) {
                 songName.append(args!![i], " ")
             }
-            SpotifyRequests.setTrack(songName.toString(), extras!!["auth"] ?: error("Auth was null"))
+            val track = SpotifyRequests.setTrack(songName.toString(), extras!!["auth"] ?: error("Auth was null"))
+            val map = HashMap<String, String>()
+            map["name"] = track.name
+            map["artist"] = track.artist
+            map["image"] = track.imageUrl
+            this.taskInfo = TaskInfo("Play Song Command", map)
         }
     }
 }
